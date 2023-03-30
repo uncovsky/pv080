@@ -1,7 +1,7 @@
 import sys 
 import os
-import yaml
 import flask
+import yaml
 
 app = flask.Flask(__name__)
 
@@ -37,7 +37,7 @@ def fetch_website(urllib_version, url):
 
 def load_yaml(filename):
     stream = open(filename)
-    deserialized_data = yaml.load(stream, Loader=yaml.Loader) #deserializing data
+    deserialized_data = yaml.safe_load(stream, Loader=yaml.Loader) #deserializing data
     return deserialized_data
     
 def authenticate(password):
@@ -51,10 +51,10 @@ if __name__ == '__main__':
     print("2. Code injection vulnerability: use string=;print('Own code executed') #")
     print("3. Yaml deserialization vulnerability: use string=file.yaml")
     print("4. Use of assert statements vulnerability: run program with -O argument")
-    choice  = input("Select vulnerability: ")
+    choice  = raw_input("Select vulnerability: ")
     if choice == "1": 
-        new_person = Person("Vickie")  
-        print_nametag(input("Please format your nametag: "), new_person)
+        New_Person = Person("Vickie")  
+        print_nametag(raw_input("Please format your nametag: "), new_person)
     elif choice == "2":
         urlib_version = input("Choose version of urllib: ")
         fetch_website(urlib_version, url="https://www.google.com")
